@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Checkout · Miyaru Dive Equipment</title>
   <meta name="description" content="Secure checkout for your Miyaru dive gear.">
   <meta name="theme-color" content="#02131c">
@@ -79,25 +79,26 @@
 
           <div class="co-card">
             <h3><span class="step-n">3</span> Payment</h3>
-            <div class="pay-methods" id="payMethods">
+            <fieldset class="pay-methods" id="payMethods">
+              <legend class="pay-legend">Choose a payment method</legend>
               <label class="pay-opt active">
-                <span class="radio"></span>
+                <input class="sr-radio" type="radio" name="pay" value="card" checked>
+                <span class="radio" aria-hidden="true"></span>
                 <span><span class="p-label">Card</span><br><span class="p-sub">Visa · Mastercard · Amex</span></span>
-                <input type="radio" name="pay" value="card" checked hidden>
                 <span class="p-icons"><span>VISA</span><span>MC</span><span>AMEX</span></span>
               </label>
               <label class="pay-opt">
-                <span class="radio"></span>
+                <input class="sr-radio" type="radio" name="pay" value="bml">
+                <span class="radio" aria-hidden="true"></span>
                 <span><span class="p-label">BML Connect</span><br><span class="p-sub">Pay with your Bank of Maldives app</span></span>
-                <input type="radio" name="pay" value="bml" hidden>
                 <span class="p-icons"><span>BML</span></span>
               </label>
               <label class="pay-opt">
-                <span class="radio"></span>
+                <input class="sr-radio" type="radio" name="pay" value="cod">
+                <span class="radio" aria-hidden="true"></span>
                 <span><span class="p-label">Cash on delivery</span><br><span class="p-sub">Greater Malé area only</span></span>
-                <input type="radio" name="pay" value="cod" hidden>
               </label>
-            </div>
+            </fieldset>
           </div>
 
           <button class="btn btn-lg btn-block" type="submit" style="margin-top:1.3rem">

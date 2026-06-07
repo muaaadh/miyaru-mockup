@@ -9,13 +9,13 @@
   var CATEGORIES = [
     { slug: "oxygen", label: "O₂ Systems", tagline: "Pocket air, anywhere",
       blurb: "Refillable mini cylinders that slip in a BCD pocket — your safety margin and your quick-dip freedom.",
-      image: "assets/products/o2-poster.png" },
+      image: "assets/products/o2-tank.png" },
     { slug: "masks", label: "Masks", tagline: "See the whole reef",
       blurb: "Low-volume and full-face masks with tempered, anti-fog lenses and a leak-free silicone seal.",
       image: "assets/products/fullface-mask-rocks.png" },
     { slug: "fins", label: "Fins", tagline: "More glide, less effort",
       blurb: "Long-blade freediving fins engineered for an efficient kick and easy travel.",
-      image: "assets/img/diver-bubbles.jpg" },
+      image: "assets/products/fins-only.png" },
     { slug: "bundles", label: "Kits & Bundles", tagline: "Everything, ready to dive",
       blurb: "Curated kits that pair mask, fins and O₂ so you can step off the boat fully equipped.",
       image: "assets/products/fins-red-masks.png" }
@@ -30,11 +30,11 @@
       badge: "Bestseller", badgeType: "aqua",
       rating: 4.9, reviews: 214,
       short: "A refillable mini cylinder for quick dips, safety stops and a confident ascent.",
-      desc: "The cylinder that started it all. The Miyaru O₂ Pocket gives you 8–10 minutes of breathing time in a body small enough to live in a BCD pocket. Anodised aluminium, a stainless valve and a dive-grade regulator you refill yourself from any standard tank or hand pump — no shop visit required.",
-      images: ["assets/products/o2-poster.png", "assets/products/mask-black-tank-beach.png", "assets/products/fullface-mask-rocks.png"],
+      desc: "The cylinder that started it all. Filled with standard compressed breathing air — not pure oxygen — the Miyaru O₂ Pocket gives you up to 8–10 minutes at shallow depth in a body small enough to live in a BCD pocket: a margin for quick dips, surface swims and calm, controlled ascents. Anodised aluminium, a stainless valve and a dive-grade regulator you refill yourself from any standard tank or hand pump — no shop visit required.",
+      images: ["assets/products/o2-tank.png", "assets/products/mask-black-tank-beach.png", "assets/products/o2-poster.png"],
       options: { label: "Capacity", values: ["0.5 L", "1.0 L"] },
       highlights: [
-        "8–10 minutes of breathing time per fill",
+        "Up to 8–10 minutes of breathing air at shallow depth",
         "Refill yourself — standard tank or hand pump",
         "Aircraft cabin friendly when empty"
       ],
@@ -56,7 +56,7 @@
       rating: 4.7, reviews: 86,
       short: "A compact hand pump and adapter set to top up your Pocket Cylinder between dives.",
       desc: "Stay independent of the dive shop. This hand-pump kit refills any Miyaru O₂ cylinder from empty in minutes, with a pressure gauge, dust filter and adapters for standard valves. Folds flat into your gear bag.",
-      images: ["assets/products/o2-poster.png", "assets/products/mask-black-tank-beach.png"],
+      images: ["assets/products/mask-black-tank-beach.png", "assets/products/o2-tank.png"],
       options: null,
       highlights: [
         "Refills a 0.5 L cylinder in ~4 minutes",
@@ -80,7 +80,7 @@
       rating: 4.8, reviews: 137,
       short: "A low-volume, low-profile mask with a crystal field of view and feather-light frame.",
       desc: "Frost White is our everyday low-volume mask: a soft medical-grade silicone skirt that seals on every face, tempered glass lenses with an anti-fog coat, and a frame light enough to forget you're wearing it. Equalise faster and clear in a single breath.",
-      images: ["assets/products/mask-white-leaves.png", "assets/products/fins-red-masks.png"],
+      images: ["assets/products/mask-white-leaves.png", "assets/products/fullface-mask-rocks.png"],
       options: { label: "Strap", values: ["Silicone", "Comfort fabric"] },
       highlights: [
         "Low-volume — equalises fast, clears easy",
@@ -105,7 +105,7 @@
       rating: 4.8, reviews: 121,
       short: "The Frost mask in a stealth black skirt that kills lens glare on bright reef days.",
       desc: "Same low-volume fit, same crystal optics — finished in a black silicone skirt that blocks side glare and sharpens contrast on sun-soaked reefs. A favourite of underwater photographers and spearos alike.",
-      images: ["assets/products/mask-black-tank-beach.png", "assets/products/fullface-mask-rocks.png"],
+      images: ["assets/products/mask-abyss.png", "assets/products/mask-black-tank-beach.png"],
       options: { label: "Strap", values: ["Silicone", "Comfort fabric"] },
       highlights: [
         "Black skirt blocks side glare",
@@ -156,7 +156,7 @@
       rating: 4.9, reviews: 158,
       short: "Long-blade fins tuned for an efficient kick — more glide for every breath you hold.",
       desc: "Current is built for the long, slow kick of freediving and reef cruising. A progressive-flex composite blade transfers every bit of leg power into forward motion, while the anatomical foot pocket spreads load so your calves last the whole session. Coral red, because the ocean should see you coming.",
-      images: ["assets/products/fins-red-masks.png", "assets/img/diver-bubbles.jpg"],
+      images: ["assets/products/fins-only.png", "assets/products/fins-red-masks.png"],
       options: { label: "Size (EU)", values: ["38–39", "40–41", "42–43", "44–45", "46–47"] },
       highlights: [
         "Progressive-flex composite blade",
@@ -181,8 +181,8 @@
       badge: "Save $48", badgeType: "coral",
       rating: 5.0, reviews: 73,
       short: "Step off the boat fully equipped: a Reef mask, Current fins and a Pocket O₂ cylinder.",
-      desc: "Everything you need to get in the water, bundled and priced to save. The Explorer Kit pairs a Reef low-volume mask, a set of Current freediving fins and a Miyaru O₂ Pocket Cylinder in a single roll-top dry bag — the cleanest way to gift a diver or kit yourself out in one go.",
-      images: ["assets/products/fins-red-masks.png", "assets/products/mask-white-leaves.png", "assets/products/o2-poster.png"],
+      desc: "Everything you need to get in the water, bundled and priced to save. The Miyaru Dive Kit pairs a Reef low-volume mask, a set of Current freediving fins and a Miyaru O₂ Pocket Cylinder in a single roll-top dry bag — the cleanest way to gift a diver or kit yourself out in one go.",
+      images: ["assets/products/fins-red-masks.png", "assets/products/mask-white-leaves.png", "assets/products/o2-tank.png"],
       options: { label: "Fin size (EU)", values: ["38–39", "40–41", "42–43", "44–45", "46–47"] },
       highlights: [
         "Reef mask + Current fins + O₂ Pocket Cylinder",

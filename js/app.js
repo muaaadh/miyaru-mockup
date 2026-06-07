@@ -163,7 +163,7 @@
   function chromeOverlaysHTML() {
     return (
       '<div class="backdrop" id="backdrop"></div>' +
-      '<aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart" aria-hidden="true">' +
+      '<aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-label="Shopping cart" aria-hidden="true" inert>' +
         '<div class="cart-head"><h3>' + icon("bag") + ' Your cart <span id="cartHeadCount" class="muted" style="font-weight:400;font-size:.8em"></span></h3>' +
           '<button class="c-close" id="cartClose" aria-label="Close cart">' + icon("close") + "</button></div>" +
         '<div class="cart-items" id="cartItems"></div>' +
@@ -271,19 +271,26 @@
 
   function renderAll() { renderBadge(); renderDrawer(); }
 
+  var lastCartFocus = null;
   function openCart() {
     var d = qs("#cartDrawer"), b = qs("#backdrop");
     if (!d) return;
+    lastCartFocus = document.activeElement;
+    d.removeAttribute("inert");
     d.classList.add("open"); d.setAttribute("aria-hidden", "false");
     b.classList.add("show");
     document.body.style.overflow = "hidden";
+    var close = qs("#cartClose"); if (close) close.focus();
   }
   function closeCart() {
     var d = qs("#cartDrawer"), b = qs("#backdrop");
-    if (!d) return;
+    if (!d || !d.classList.contains("open")) return;
     d.classList.remove("open"); d.setAttribute("aria-hidden", "true");
+    d.setAttribute("inert", "");
     b.classList.remove("show");
     if (!document.body.classList.contains("nav-open")) document.body.style.overflow = "";
+    if (lastCartFocus && lastCartFocus.focus) lastCartFocus.focus();
+    lastCartFocus = null;
   }
 
   /* ---------------- Toast ---------------- */
@@ -428,15 +435,25 @@
     onScroll();
 
     var toggle = qs("#navToggle"), overlay = qs("#navOverlay");
+    function openNav() {
+      document.body.classList.add("nav-open");
+      if (toggle) toggle.setAttribute("aria-expanded", "true");
+      if (overlay) {
+        overlay.setAttribute("aria-hidden", "false");
+        requestAnimationFrame(function () { var firstLink = qs("a", overlay); if (firstLink) firstLink.focus(); });
+      }
+      document.body.style.overflow = "hidden";
+    }
     function closeNav() {
+      if (!document.body.classList.contains("nav-open")) return;
       document.body.classList.remove("nav-open");
       if (toggle) toggle.setAttribute("aria-expanded", "false");
-      if (!qs("#cartDrawer.open")) document.body.style.overflow = "";
+      if (overlay) overlay.setAttribute("aria-hidden", "true");
+      if (!qs("#cartDrawer.open")) document.body.style.overflow = "";  // keep locked if cart still open
+      if (toggle) toggle.focus();
     }
     if (toggle) toggle.addEventListener("click", function () {
-      var open = document.body.classList.toggle("nav-open");
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
-      document.body.style.overflow = open ? "hidden" : "";
+      if (document.body.classList.contains("nav-open")) closeNav(); else openNav();
     });
     if (overlay) qsa("a", overlay).forEach(function (a) { a.addEventListener("click", closeNav); });
 
@@ -445,7 +462,19 @@
     if (cartOpenBtn) cartOpenBtn.addEventListener("click", openCart);
     if (cartCloseBtn) cartCloseBtn.addEventListener("click", closeCart);
     if (backdrop) backdrop.addEventListener("click", closeCart);
-    document.addEventListener("keydown", function (e) { if (e.key === "Escape") { closeCart(); closeNav(); } });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") { closeCart(); closeNav(); return; }
+      if (e.key !== "Tab") return;
+      var container = qs("#cartDrawer.open");
+      if (!container && document.body.classList.contains("nav-open")) container = qs("#navOverlay");
+      if (!container) return;
+      var f = qsa('a[href], button:not([disabled]), input:not([disabled]), select, [tabindex]:not([tabindex="-1"])', container)
+        .filter(function (el) { return el.offsetWidth > 0 || el.offsetHeight > 0 || el === document.activeElement; });
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
     qs("#navSearch") && qs("#navSearch").addEventListener("click", function () { window.location.href = "shop.html"; });
 
     // Drawer delegated controls
@@ -496,12 +525,13 @@
     var cats = [{ slug: "all", label: "All gear" }].concat(M.categories.map(function (c) { return { slug: c.slug, label: c.label }; }));
     if (pills) {
       pills.innerHTML = cats.map(function (c) {
-        return '<button class="filter-pill' + (c.slug === state.cat ? " active" : "") + '" data-cat="' + c.slug + '">' + c.label + "</button>";
+        var on = c.slug === state.cat;
+        return '<button class="filter-pill' + (on ? " active" : "") + '" data-cat="' + c.slug + '" aria-pressed="' + on + '">' + c.label + "</button>";
       }).join("");
       pills.addEventListener("click", function (e) {
         var b = e.target.closest(".filter-pill"); if (!b) return;
         state.cat = b.dataset.cat;
-        qsa(".filter-pill", pills).forEach(function (x) { x.classList.toggle("active", x === b); });
+        qsa(".filter-pill", pills).forEach(function (x) { var on = x === b; x.classList.toggle("active", on); x.setAttribute("aria-pressed", on); });
         syncUrl(); render();
       });
     }
@@ -513,8 +543,10 @@
     }
     function headings() {
       var meta = M.categories.filter(function (c) { return c.slug === state.cat; })[0];
-      if (titleEl) titleEl.textContent = meta ? meta.label : "All dive gear";
+      var label = meta ? meta.label : "All dive gear";
+      if (titleEl) titleEl.textContent = label;
       if (descEl) descEl.textContent = meta ? meta.blurb : "Refillable O₂, low-volume masks and long-blade fins — the full Miyaru range, built by divers for the blue.";
+      document.title = label + " · Miyaru";
     }
     function render() {
       var list = M.byCategory(state.cat);
@@ -556,7 +588,7 @@
     var badge = p.badge ? '<span class="chip"><span class="dot"></span>' + p.badge + "</span>" : "";
 
     host.innerHTML =
-      '<nav class="breadcrumb" style="margin-bottom:1.4rem;font-size:var(--fs-xs)"><a href="index.html">Home</a> ' + icon("chevron", "") + ' <a href="shop.html">Shop</a> ' + icon("chevron") + " <a href=\"shop.html?cat=" + p.category + "\">" + M.categoryLabel(p.category) + "</a></nav>" +
+      '<nav class="breadcrumb" style="margin-bottom:1.4rem;font-size:var(--fs-xs)"><a href="index.html">Home</a> <span>›</span> <a href="shop.html">Shop</a> <span>›</span> <a href="shop.html?cat=' + p.category + '">' + M.categoryLabel(p.category) + "</a></nav>" +
       '<div class="pdp">' +
         '<div class="pdp-gallery">' +
           '<div class="pdp-main"><img id="pdpMain" src="' + p.images[0] + '" alt="' + p.name + '"></div>' +
@@ -654,10 +686,11 @@
 
     // Payment selection
     var payWrap = qs("#payMethods");
-    if (payWrap) payWrap.addEventListener("click", function (e) {
-      var opt = e.target.closest(".pay-opt"); if (!opt) return;
-      qsa(".pay-opt", payWrap).forEach(function (x) { x.classList.toggle("active", x === opt); });
-      var radio = opt.querySelector("input"); if (radio) radio.checked = true;
+    if (payWrap) payWrap.addEventListener("change", function () {
+      qsa(".pay-opt", payWrap).forEach(function (x) {
+        var r = x.querySelector("input[type=radio]");
+        x.classList.toggle("active", !!(r && r.checked));
+      });
     });
 
     // Place order
@@ -668,6 +701,7 @@
       if (!form.checkValidity()) { form.reportValidity(); return; }
       var orderNo = "MYR-" + String(100000 + Math.floor(((Date.now ? Date.now() : 524000) % 900000))).slice(0, 6);
       saveCart([]); renderAll();
+      var ph = qs(".page-hero"); if (ph) ph.style.display = "none";  // avoid a second <h1> on the confirmed page
       var page = qs("#checkoutPage");
       page.innerHTML =
         '<div class="confirm reveal in">' +
