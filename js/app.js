@@ -34,8 +34,7 @@
     heart: '<path d="M12 20s-7-4.5-9.2-9C1.3 8 3 4.5 6.3 4.5c2 0 3.2 1.2 3.7 2 0.5-.8 1.7-2 3.7-2C17 4.5 18.7 8 17.2 11 15 15.5 12 20 12 20z"/>',
     chevron: '<path d="M6 9l6 6 6-6"/>',
     instagram: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>',
-    facebook: '<path d="M14 8h2V5h-2c-2 0-3 1.2-3 3v2H9v3h2v6h3v-6h2.2l.8-3H14V8.5c0-.3.2-.5.5-.5z" fill="currentColor" stroke="none"/>',
-    youtube: '<rect x="3" y="6" width="18" height="12" rx="3.5"/><path d="M11 9.5l4 2.5-4 2.5z" fill="currentColor" stroke="none"/>',
+    tiktok: '<path d="M16.5 3c.32 1.96 1.43 3.4 3.5 3.66v2.4c-1.2.08-2.37-.22-3.5-.83v5.9c0 3.03-2.13 5.37-5 5.37a5 5 0 0 1-1-9.9v2.62a2.43 2.43 0 1 0 1.6 2.28V3h2.4z" fill="currentColor" stroke="none"/>',
     mail: '<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/>',
     bag: '<path d="M6 8h12l-1 12H7z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>'
   };
@@ -90,12 +89,11 @@
       '<header class="site-header" id="siteHeader">' +
         '<div class="container wide bar">' +
           '<a class="brand" href="index.html" aria-label="Miyaru home">' +
-            '<img src="assets/logo.jpg" alt="Miyaru" width="120" height="38">' +
+            '<img src="assets/logo-white.png" alt="Miyaru" width="150" height="68">' +
           "</a>" +
           '<nav class="nav" aria-label="Primary">' + links + "</nav>" +
           '<div class="header-actions">' +
-            '<button class="icon-btn" id="navSearch" aria-label="Search">' + icon("search") + "</button>" +
-            '<button class="icon-btn" id="cartOpen" aria-label="Open cart">' + icon("cart") + '<span class="cart-count" id="cartCount">0</span></button>' +
+            '<button class="icon-btn cart-btn" id="cartOpen" aria-label="Open cart">' + icon("bag") + '<span class="cart-count" id="cartCount">0</span></button>' +
             '<button class="icon-btn hamburger" id="navToggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>' +
           "</div>" +
         "</div>" +
@@ -112,9 +110,13 @@
     );
   }
 
+  var SOCIALS = [
+    { key: "instagram", label: "Instagram", url: "https://www.instagram.com/miyaru.maldives/" },
+    { key: "tiktok", label: "TikTok", url: "https://www.tiktok.com/@miyaru.maldives" }
+  ];
   function socialHTML() {
-    return ["instagram", "facebook", "youtube"].map(function (s) {
-      return '<a href="#" aria-label="' + s + '" class="social-link">' + icon(s) + "</a>";
+    return SOCIALS.map(function (s) {
+      return '<a href="' + s.url + '" aria-label="Miyaru on ' + s.label + '" class="social-link" target="_blank" rel="noopener noreferrer">' + icon(s.key) + "</a>";
     }).join("");
   }
 
@@ -125,7 +127,7 @@
         '<div class="container wide">' +
           '<div class="footer-grid">' +
             '<div class="footer-brand">' +
-              '<a class="brand" href="index.html" aria-label="Miyaru home"><img src="assets/logo.jpg" alt="Miyaru" width="130" height="40"></a>' +
+              '<a class="brand" href="index.html" aria-label="Miyaru home"><img src="assets/logo-white.png" alt="Miyaru" width="150" height="68"></a>' +
               "<p>Dive equipment born in the Maldives. Refillable O₂, low-volume masks and long-blade fins — built by divers, for the blue.</p>" +
               '<div class="social">' + socialHTML() + "</div>" +
             "</div>" +
@@ -318,7 +320,6 @@
         '<span class="p-cat">' + M.categoryLabel(p.category) + "</span>" +
         '<h3 class="p-name"><a href="product.html?id=' + p.id + '">' + p.name + "</a></h3>" +
         '<p class="p-desc">' + p.short + "</p>" +
-        '<div class="rating-row">' + starsHTML(p.rating) + "<span>" + p.rating.toFixed(1) + " · " + p.reviews + " reviews</span></div>" +
         '<div class="p-foot"><span class="price">' + money(p.price) + wasHTML + "</span>" +
           '<button class="add-btn add-quick" data-id="' + p.id + '" data-opt="' + defOpt + '" aria-label="Add ' + p.name + ' to cart">' + icon("plus") + "</button></div>" +
       "</div>" +
@@ -356,7 +357,7 @@
   function initBubbles() {
     if (reduceMotion) return;
     qsa(".bubbles").forEach(function (layer) {
-      var count = parseInt(layer.dataset.count || "14", 10);
+      var count = parseInt(layer.dataset.bubbles || "14", 10);
       for (var i = 0; i < count; i++) {
         var size = 4 + Math.random() * 22;
         var b = document.createElement("span");
@@ -464,7 +465,7 @@
     if (backdrop) backdrop.addEventListener("click", closeCart);
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") { closeCart(); closeNav(); return; }
-      if (e.key !== "Tab") return;
+      if (e.key !== "Tab") return;  // focus trap below
       var container = qs("#cartDrawer.open");
       if (!container && document.body.classList.contains("nav-open")) container = qs("#navOverlay");
       if (!container) return;
@@ -475,7 +476,6 @@
       if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
       else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
     });
-    qs("#navSearch") && qs("#navSearch").addEventListener("click", function () { window.location.href = "shop.html"; });
 
     // Drawer delegated controls
     var items = qs("#cartItems"), foot = qs("#cartFoot");
@@ -599,7 +599,7 @@
         '<div class="pdp-info">' +
           '<span class="p-cat">' + M.categoryLabel(p.category) + "</span>" +
           "<h1>" + p.name + "</h1>" +
-          '<div class="rating-row">' + starsHTML(p.rating) + "<span>" + p.rating.toFixed(1) + " · " + p.reviews + " reviews</span> " + badge + "</div>" +
+          (badge ? '<div class="rating-row">' + badge + "</div>" : "") +
           '<div class="pdp-price"><span class="price">' + money(p.price) + " " + wasHTML + "</span></div>" +
           '<p class="pdp-desc">' + p.desc + "</p>" +
           '<ul class="tick-list">' + p.highlights.map(function (h) { return '<li><span class="tk">' + icon("check") + "</span><span>" + h + "</span></li>"; }).join("") + "</ul>" +

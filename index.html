@@ -24,7 +24,8 @@
       <div class="hero-media"><img data-parallax="0.16" src="assets/img/diver-blue.jpg" alt="Two freedivers gliding through a sunlit reef cavern"></div>
       <div class="caustics"></div>
       <div class="light-rays"></div>
-      <div class="bubbles" data-count="16"></div>
+      <div class="bubbles" data-bubbles="16"></div>
+      <svg class="swell hero-swell" viewBox="0 0 1440 130" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70 Q 180 30 360 70 T 720 70 T 1080 70 T 1440 70"/><path d="M0 95 Q 180 55 360 95 T 720 95 T 1080 95 T 1440 95"/><path d="M0 45 Q 180 12 360 45 T 720 45 T 1080 45 T 1440 45"/></svg>
       <div class="container wide hero-inner">
         <span class="eyebrow reveal fade">Dive equipment · born in the Maldives</span>
         <h1 class="reveal d1">Breathe deeper.<br>Dive <span class="text-grad">lighter.</span></h1>
@@ -34,9 +35,9 @@
           <a class="btn btn-ghost btn-lg" href="#o2">Meet Miyaru O₂</a>
         </div>
         <div class="hero-stats reveal d4">
-          <div><div class="s-val"><span data-count="4.9"></span> ★</div><div class="s-lbl">Average rating</div></div>
-          <div><div class="s-val">up to <span data-count="10"></span> min</div><div class="s-lbl">Air per O₂ fill</div></div>
-          <div><div class="s-val"><span data-count="12000" data-suffix="+"></span></div><div class="s-lbl">Divers equipped</div></div>
+          <div><div class="s-val">Refillable</div><div class="s-lbl">Top it up yourself</div></div>
+          <div><div class="s-val">Maldives-tested</div><div class="s-lbl">Proven on our reefs</div></div>
+          <div><div class="s-val">Travel-ready</div><div class="s-lbl">Packs into a carry-on</div></div>
         </div>
       </div>
       <a class="scroll-hint" href="#bestsellers" aria-label="Scroll to products">
@@ -147,6 +148,44 @@
       </div>
     </section>
 
+    <!-- ============ HOW IT WORKS ============ -->
+    <section class="section" id="how">
+      <svg class="swell swell-soft" viewBox="0 0 1440 130" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70 Q 180 30 360 70 T 720 70 T 1080 70 T 1440 70"/><path d="M0 95 Q 180 55 360 95 T 720 95 T 1080 95 T 1440 95"/></svg>
+      <div class="container wide">
+        <div class="section-head center">
+          <span class="eyebrow center reveal fade">Simple by design</span>
+          <h2 class="reveal">How the O₂ works</h2>
+          <p class="lede reveal d1" style="margin-inline:auto">No cartridges, no shop runs — four easy steps from empty cylinder to back in the blue.</p>
+        </div>
+        <ol class="steps">
+          <li class="step reveal">
+            <span class="step-num">01</span>
+            <span class="step-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 13.7-5.7L20 8"/><path d="M20 4v4h-4"/><path d="M20 12a8 8 0 0 1-13.7 5.7L4 16"/><path d="M4 20v-4h4"/></svg></span>
+            <h3>Fill it</h3>
+            <p>Top up from any standard scuba tank or the Miyaru hand pump — full in a few minutes.</p>
+          </li>
+          <li class="step reveal d1">
+            <span class="step-num">02</span>
+            <span class="step-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 12H7z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></span>
+            <h3>Pocket it</h3>
+            <p>Clip the cylinder into your BCD pocket or kit bag. Small enough to forget it’s there.</p>
+          </li>
+          <li class="step reveal d2">
+            <span class="step-num">03</span>
+            <span class="step-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg></span>
+            <h3>Breathe easy</h3>
+            <p>A few minutes of air for shallow dips, gear checks and calm, unhurried ascents.</p>
+          </li>
+          <li class="step reveal d3">
+            <span class="step-num">04</span>
+            <span class="step-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9c2.5 0 2.5 3 5 3s2.5-3 5-3 2.5 3 5 3 2.5-3 5-3"/><path d="M2 15c2.5 0 2.5 3 5 3s2.5-3 5-3 2.5 3 5 3 2.5-3 5-3"/></svg></span>
+            <h3>Rinse &amp; repeat</h3>
+            <p>Back on the boat, rinse, refill and go again. No single-use parts, ever.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
     <!-- ============ WHY MIYARU ============ -->
     <section class="section">
       <div class="container wide">
@@ -175,20 +214,6 @@
             <h3>2-year cover</h3>
             <p>Every Miyaru product is backed by a 2-year warranty and friendly island support.</p>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ STATS BAND ============ -->
-    <section class="section tight" style="position:relative;overflow:hidden">
-      <div class="caustics"></div>
-      <div class="bubbles" data-count="10"></div>
-      <div class="container">
-        <div class="stat-band">
-          <div class="stat reveal"><div class="s-num"><span class="text-grad" data-count="4.9"></span></div><div class="s-lbl">Average product rating</div></div>
-          <div class="stat reveal d1"><div class="s-num">up to <span class="text-grad" data-count="10"></span><span class="text-grad"> min</span></div><div class="s-lbl">Air on a single O₂ fill</div></div>
-          <div class="stat reveal d2"><div class="s-num"><span class="text-grad" data-count="60" data-suffix="+"></span></div><div class="s-lbl">Reef sites field-tested</div></div>
-          <div class="stat reveal d3"><div class="s-num"><span class="text-grad" data-count="12000" data-suffix="+"></span></div><div class="s-lbl">Divers equipped worldwide</div></div>
         </div>
       </div>
     </section>
@@ -295,7 +320,7 @@
       <div class="container wide">
         <div class="cta-band reveal fade">
           <img src="assets/img/deep-blue.jpg" alt="">
-          <div class="bubbles" data-count="12"></div>
+          <div class="bubbles" data-bubbles="12"></div>
           <span class="eyebrow center" style="justify-content:center">Ready when you are</span>
           <h2 style="margin:1rem 0">Your next dive starts here.</h2>
           <p class="lede">Pick your kit, pack it light, and meet us in the blue. Free delivery across the Maldives, worldwide shipping on request.</p>

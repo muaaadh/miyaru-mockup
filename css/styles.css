@@ -32,10 +32,10 @@
 
 /* ---------- 01 Tokens & theme ---------- */
 :root {
-  /* Ocean palette */
-  --abyss:   #02131c;
-  --deep:    #04212e;
-  --ocean:   #063a4f;
+  /* Ocean palette — blackish base, ocean accents */
+  --abyss:   #06080b;
+  --deep:    #0a1116;
+  --ocean:   #0e2a36;
   --tide:    #0b6e8c;
   --lagoon:  #11a7c0;
   --aqua:    #34dce4;
@@ -62,7 +62,7 @@
 
   /* Brand gradients */
   --grad-aqua:  linear-gradient(135deg, var(--aqua) 0%, var(--lagoon) 60%, var(--tide) 100%);
-  --grad-deep:  linear-gradient(180deg, #03222f 0%, #02131c 100%);
+  --grad-deep:  linear-gradient(180deg, #0a1218 0%, #06080b 100%);
   --grad-text:  linear-gradient(100deg, var(--aqua-2), var(--aqua) 45%, var(--lagoon));
 
   /* Type */
@@ -139,8 +139,8 @@ body::before {
   inset: 0;
   z-index: -2;
   background:
-    radial-gradient(120% 80% at 80% -10%, rgba(17, 167, 192, 0.18), transparent 60%),
-    radial-gradient(90% 70% at 0% 100%, rgba(11, 110, 140, 0.20), transparent 55%),
+    radial-gradient(120% 80% at 80% -10%, rgba(17, 167, 192, 0.10), transparent 60%),
+    radial-gradient(90% 70% at 0% 100%, rgba(11, 110, 140, 0.12), transparent 55%),
     var(--grad-deep);
 }
 
@@ -427,7 +427,8 @@ p { text-wrap: pretty; }
 .announce {
   position: relative;
   z-index: 60;
-  background: linear-gradient(90deg, var(--ocean), var(--tide));
+  background: linear-gradient(90deg, #08161d, #0c2531);
+  border-bottom: 1px solid var(--line);
   color: var(--foam);
   font-size: var(--fs-xs);
   letter-spacing: 0.04em;
@@ -442,7 +443,7 @@ p { text-wrap: pretty; }
   text-align: center;
 }
 .announce .a-item { display: inline-flex; align-items: center; gap: 0.5em; white-space: nowrap; }
-.announce .a-item svg { width: 14px; height: 14px; opacity: 0.85; }
+.announce .a-item svg { width: 14px; height: 14px; color: var(--aqua); opacity: 0.95; }
 .announce .a-sep { opacity: 0.4; }
 
 .site-header {
@@ -468,11 +469,11 @@ p { text-wrap: pretty; }
 
 .brand { display: inline-flex; align-items: center; gap: 0.7rem; flex-shrink: 0; }
 .brand img {
-  height: 38px;
+  height: 30px;
   width: auto;
-  mix-blend-mode: screen; /* drops the black logo background on dark header */
-  filter: drop-shadow(0 0 10px rgba(52, 220, 228, 0.25));
+  filter: drop-shadow(0 0 12px rgba(52, 220, 228, 0.22));
 }
+.footer-brand .brand img { height: 34px; }
 .brand .wordmark {
   font-family: var(--font-display);
   font-weight: 600;
@@ -521,18 +522,20 @@ p { text-wrap: pretty; }
 .icon-btn svg { width: 22px; height: 22px; }
 .cart-count {
   position: absolute;
-  top: 4px; right: 2px;
-  min-width: 18px; height: 18px;
+  top: 6px; right: 6px;
+  min-width: 16px; height: 16px;
   padding: 0 4px;
   display: inline-flex; align-items: center; justify-content: center;
   font-family: var(--font-display);
-  font-size: 0.66rem;
+  font-size: 0.6rem;
   font-weight: 700;
+  line-height: 1;
   border-radius: 100px;
   background: var(--coral);
-  color: #fff;
+  color: #2a0a05;
   box-shadow: 0 0 0 2px var(--abyss);
   transform: scale(0);
+  transform-origin: center;
   transition: transform 0.3s var(--ease);
 }
 .cart-count.show { transform: scale(1); }
@@ -727,6 +730,38 @@ body.nav-open .nav-overlay a:nth-child(6) { animation-delay: 0.38s; }
   opacity: 0; transition: opacity 0.4s ease;
 }
 .feature-card:hover::after { opacity: 1; }
+
+/* ---------- How it works (steps) ---------- */
+#how { position: relative; overflow: hidden; }
+.steps {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1rem, 2.2vw, 1.6rem);
+  position: relative;
+  z-index: 1;
+}
+.step {
+  position: relative;
+  padding: clamp(1.4rem, 3vw, 1.9rem) clamp(1.2rem, 2.4vw, 1.5rem);
+  border-radius: var(--radius-l);
+  background: var(--card);
+  border: 1px solid var(--line);
+  transition: transform 0.5s var(--ease), border-color 0.4s ease, background 0.4s ease;
+}
+.step:hover { transform: translateY(-6px); border-color: var(--line-strong); background: var(--card-2); }
+.step-num { font-family: var(--font-display); font-size: var(--fs-xs); font-weight: 700; letter-spacing: 0.18em; color: var(--aqua); }
+.step-ico { display: grid; place-items: center; width: 52px; height: 52px; margin: 0.8rem 0 1rem; border-radius: 14px; background: rgba(52, 220, 228, 0.10); border: 1px solid var(--line-strong); color: var(--aqua); }
+.step-ico svg { width: 26px; height: 26px; }
+.step h3 { font-size: var(--fs-md); margin-bottom: 0.45rem; }
+.step p { font-size: var(--fs-sm); color: var(--text-soft); }
+
+/* ---------- White ocean swell lines (subtle Maldives motif) ---------- */
+.swell { position: absolute; left: 0; right: 0; width: 100%; height: clamp(64px, 11vw, 120px); fill: none; stroke: #ffffff; stroke-width: 1; opacity: 0.07; pointer-events: none; z-index: 0; }
+.swell path { vector-effect: non-scaling-stroke; }
+.hero-swell { bottom: 0; opacity: 0.13; z-index: 1; animation: swell-drift 16s ease-in-out infinite alternate; }
+.swell-soft { top: 0; opacity: 0.05; }
+@keyframes swell-drift { from { transform: translateX(-1.6%); } to { transform: translateX(1.6%); } }
 
 /* ---------- 11 Category cards ---------- */
 .cat-card {
@@ -1313,6 +1348,7 @@ body.nav-open .nav-overlay a:nth-child(6) { animation-delay: 0.38s; }
 
 @media (max-width: 760px) {
   .cols-3, .cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .stat-band { grid-template-columns: repeat(2, 1fr); row-gap: 2rem; }
   .gallery { grid-template-columns: repeat(2, 1fr); }
   .g-wide { grid-column: span 2; }
@@ -1324,6 +1360,7 @@ body.nav-open .nav-overlay a:nth-child(6) { animation-delay: 0.38s; }
 
 @media (max-width: 540px) {
   .cols-2, .cols-3, .cols-4 { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; }
   .product-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 160px), 1fr)); gap: 0.8rem; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .form-grid { grid-template-columns: 1fr; }
