@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Checkout · Miyaru Dive Equipment</title>
+  <meta name="description" content="Secure checkout for your Miyaru dive gear.">
+  <meta name="theme-color" content="#02131c">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="checkout" data-year="2026">
+
+  <main>
+    <section class="page-hero">
+      <div class="caustics"></div>
+      <div class="container wide">
+        <nav class="breadcrumb"><a href="index.html">Home</a> <span>›</span> <a href="shop.html">Shop</a> <span>›</span> <span>Checkout</span></nav>
+        <h1>Checkout</h1>
+        <p>A quick, secure checkout. This is a concept mockup — no real payment is taken.</p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0" id="checkoutPage">
+      <div class="container wide checkout" id="checkout">
+        <form id="checkoutForm" novalidate>
+          <div class="co-card">
+            <h3><span class="step-n">1</span> Contact</h3>
+            <div class="form-grid">
+              <div class="form-field full">
+                <label for="co-email">Email address</label>
+                <input id="co-email" type="email" required placeholder="you@email.com" autocomplete="email">
+              </div>
+              <div class="form-field">
+                <label for="co-first">First name</label>
+                <input id="co-first" type="text" required placeholder="Aishath" autocomplete="given-name">
+              </div>
+              <div class="form-field">
+                <label for="co-last">Last name</label>
+                <input id="co-last" type="text" required placeholder="Mohamed" autocomplete="family-name">
+              </div>
+            </div>
+          </div>
+
+          <div class="co-card">
+            <h3><span class="step-n">2</span> Delivery</h3>
+            <div class="form-grid">
+              <div class="form-field full">
+                <label for="co-address">Address</label>
+                <input id="co-address" type="text" required placeholder="House name, street" autocomplete="street-address">
+              </div>
+              <div class="form-field">
+                <label for="co-island">Island / City</label>
+                <input id="co-island" type="text" required placeholder="Malé" autocomplete="address-level2">
+              </div>
+              <div class="form-field">
+                <label for="co-atoll">Atoll / Region</label>
+                <input id="co-atoll" type="text" placeholder="Kaafu" autocomplete="address-level1">
+              </div>
+              <div class="form-field">
+                <label for="co-phone">Phone</label>
+                <input id="co-phone" type="tel" required placeholder="+960 ___ ____" autocomplete="tel">
+              </div>
+              <div class="form-field">
+                <label for="co-country">Country</label>
+                <select id="co-country" autocomplete="country-name">
+                  <option>Maldives</option>
+                  <option>Sri Lanka</option>
+                  <option>India</option>
+                  <option>United Arab Emirates</option>
+                  <option>Other (worldwide)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="co-card">
+            <h3><span class="step-n">3</span> Payment</h3>
+            <div class="pay-methods" id="payMethods">
+              <label class="pay-opt active">
+                <span class="radio"></span>
+                <span><span class="p-label">Card</span><br><span class="p-sub">Visa · Mastercard · Amex</span></span>
+                <input type="radio" name="pay" value="card" checked hidden>
+                <span class="p-icons"><span>VISA</span><span>MC</span><span>AMEX</span></span>
+              </label>
+              <label class="pay-opt">
+                <span class="radio"></span>
+                <span><span class="p-label">BML Connect</span><br><span class="p-sub">Pay with your Bank of Maldives app</span></span>
+                <input type="radio" name="pay" value="bml" hidden>
+                <span class="p-icons"><span>BML</span></span>
+              </label>
+              <label class="pay-opt">
+                <span class="radio"></span>
+                <span><span class="p-label">Cash on delivery</span><br><span class="p-sub">Greater Malé area only</span></span>
+                <input type="radio" name="pay" value="cod" hidden>
+              </label>
+            </div>
+          </div>
+
+          <button class="btn btn-lg btn-block" type="submit" style="margin-top:1.3rem">
+            Place order
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+          <p class="form-note" style="text-align:center">By placing your order you agree to Miyaru's terms. Secured with 256-bit encryption.</p>
+        </form>
+
+        <aside class="summary" id="coSummary"><!-- rendered by app.js --></aside>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/products.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

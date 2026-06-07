@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Shop · Miyaru Dive Equipment</title>
+  <meta name="description" content="Shop Miyaru dive gear — refillable O₂ pocket cylinders, low-volume and full-face masks, and long-blade freediving fins. Free delivery across the Maldives.">
+  <meta name="theme-color" content="#02131c">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="shop" data-year="2026">
+
+  <main>
+    <section class="page-hero">
+      <div class="caustics"></div>
+      <div class="bubbles" data-count="8"></div>
+      <div class="container wide">
+        <nav class="breadcrumb"><a href="index.html">Home</a> <span>›</span> <span>Shop</span></nav>
+        <h1 id="shopTitle">All dive gear</h1>
+        <p id="shopDesc">Refillable O₂, low-volume masks and long-blade fins — the full Miyaru range, built by divers for the blue.</p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:clamp(1.4rem,3vw,2.2rem)">
+      <div class="container wide">
+        <div class="shop-toolbar">
+          <div class="filter-pills" id="filterPills" role="tablist" aria-label="Filter by category"></div>
+          <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+            <span class="result-count" id="resultCount"></span>
+            <div class="sort-select">
+              <span>Sort</span>
+              <select id="sortSelect" aria-label="Sort products">
+                <option value="featured">Featured</option>
+                <option value="price-asc">Price · low to high</option>
+                <option value="price-desc">Price · high to low</option>
+                <option value="rating">Top rated</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="product-grid" id="shopGrid"></div>
+      </div>
+    </section>
+
+    <section class="section tight">
+      <div class="container wide">
+        <div class="cta-band reveal fade">
+          <img src="assets/img/caustics.jpg" alt="">
+          <span class="eyebrow center" style="justify-content:center">Not sure where to start?</span>
+          <h2 style="margin:1rem 0;font-size:var(--fs-xl)">Get everything in one kit.</h2>
+          <p class="lede">Mask, fins and a Pocket O₂ cylinder — bundled, sized to you, and priced to save $48.</p>
+          <div class="hero-cta">
+            <a class="btn btn-lg" href="product.html?id=kit-explorer">See the Dive Kit
+              <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/products.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
